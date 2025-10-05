@@ -32,7 +32,7 @@ int main(){
 	saddr->sin_port = htons(port);
 	saddr->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
-	if(connect(*sock, (sockaddr*)&(*saddr), sizeof(*saddr)) < 0){
+	if(connect(*sock, reinterpret_cast<sockaddr*>(saddr.get()), sizeof(*saddr)) < 0){
 		perror("connect");
 		return -1;
 	}

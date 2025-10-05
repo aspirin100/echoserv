@@ -29,7 +29,7 @@ int main(){
 	saddr->sin_port = htons(port);
 	saddr->sin_addr.s_addr = INADDR_ANY; 
 
-	if(bind(*listener_sock, (sockaddr*)&(*saddr), sizeof(*saddr)) < 0){
+	if(bind(*listener_sock, reinterpret_cast<sockaddr*>(saddr.get()), sizeof(*saddr)) < 0){
 		perror("bind");
 		return -1;
 	}
